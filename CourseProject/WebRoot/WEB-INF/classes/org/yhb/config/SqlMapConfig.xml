@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="org.yhb.vo.Announcement" alias="Announcement" />
+		<typeAlias type="org.yhb.vo.CollegeTable" alias="College" />
+		<typeAlias type="org.yhb.vo.MajorTable" alias="Major" />
+		<typeAlias type="org.yhb.vo.UserTable" alias="User" />
+		<typeAlias type="org.yhb.vo.ClassTable" alias="Class" />
+		<typeAlias type="org.yhb.vo.ClassDetail" alias="ClassDetail" />
+		<typeAlias type="org.yhb.vo.ConfigTable" alias="ConfigTable" />
+		<typeAlias type="org.yhb.vo.CourseTable" alias="Course" />
+		<typeAlias type="org.yhb.vo.CourseDetail" alias="CourseDetail" />
+		<typeAlias type="org.yhb.vo.CourseTea" alias="CourseTea" />
+		<typeAlias type="org.yhb.vo.TeacherPosition" alias="TeaPosi" />
+		<typeAlias type="org.yhb.vo.PositionTable" alias="Position" />
+		<typeAlias type="org.yhb.vo.StudentDetail" alias="Student" />
+		<typeAlias type="org.yhb.vo.TimeTable" alias="time" />
+		<typeAlias type="org.yhb.vo.FileTable" alias="File" />
+		<typeAlias type="org.yhb.vo.CourseType" alias="CourseType" />
+		<typeAlias type="org.yhb.vo.CourseSource" alias="CourseSource" />
+		
+		<!-- Entities 参数实体 -->
+		<typeAlias type="org.yhb.vo.entity.UserLoginEntity" alias="UserLoginEntity" />
+	</typeAliases>
+	<mappers>
+		<!-- 对应类的xml配置文件的路径信息 -->
+		<mapper resource="org/yhb/dao/mapper/College.xml" />
+		<mapper resource="org/yhb/dao/mapper/Announcement.xml" />
+		<mapper resource="org/yhb/dao/mapper/Major.xml" />
+		<mapper resource="org/yhb/dao/mapper/User.xml" />
+		<mapper resource="org/yhb/dao/mapper/Class.xml" />
+		<mapper resource="org/yhb/dao/mapper/Course.xml" />
+		<mapper resource="org/yhb/dao/mapper/ConfigTable.xml" />
+		<mapper resource="org/yhb/dao/mapper/Position.xml" />
+		<mapper resource="org/yhb/dao/mapper/Time.xml" />
+		<mapper resource="org/yhb/dao/mapper/File.xml" />
+		<mapper resource="org/yhb/dao/mapper/CourseType.xml" />
+		<mapper resource="org/yhb/dao/mapper/CourseSource.xml" />
+	</mappers>
+</configuration>

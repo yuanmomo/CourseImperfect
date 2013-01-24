@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- AnnouncementDAO 相关 -->
+	<bean id="IAnnouncementImpl" class="org.yhb.dao.impl.IAnnouncementDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IAnnouncementDAOService" class="org.yhb.dao.service.IAnnouncementDAOService">
+		<property name="dao" ref="IAnnouncementImpl" />
+	</bean>
+	
+	<!-- CollegeTableDAO 相关 -->
+	<bean id="ICollegeTableDAOImpl" class="org.yhb.dao.impl.ICollegeTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="ICollegeTableDAOService" class="org.yhb.dao.service.ICollegeTableDAOService">
+		<property name="dao" ref="ICollegeTableDAOImpl" />
+	</bean>
+	
+	<!-- MajorTableDAO 相关 -->
+	<bean id="IMajorTableDAOImpl" class="org.yhb.dao.impl.IMajorTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IMajorTableDAOService" class="org.yhb.dao.service.IMajorTableDAOService">
+		<property name="dao" ref="IMajorTableDAOImpl" />
+	</bean>
+	
+	
+	<!-- UserTableDAO 相关 -->
+	<bean id="IUserTableDAOImpl" class="org.yhb.dao.impl.IUserTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IUserTableDAOService" class="org.yhb.dao.service.IUserTableDAOService">
+		<property name="dao" ref="IUserTableDAOImpl" />
+	</bean>
+	
+	<!-- ClassTableDAO 相关 -->
+	<bean id="IClassTableDAOImpl" class="org.yhb.dao.impl.IClassTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IClassTableDAOService" class="org.yhb.dao.service.IClassTableDAOService">
+		<property name="dao" ref="IClassTableDAOImpl" />
+	</bean>
+	
+	
+	<!-- ConfigTableDAO 相关 -->
+	<bean id="IConfigTableDAOImpl" class="org.yhb.dao.impl.IConfigTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IConfigTableDAOService" class="org.yhb.dao.service.IConfigTableDAOService">
+		<property name="dao" ref="IConfigTableDAOImpl" />
+	</bean>
+	
+	<!-- CourseTableDAO 相关 -->
+	<bean id="ICourseTableDAOImpl" class="org.yhb.dao.impl.ICourseTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="ICourseTableDAOService" class="org.yhb.dao.service.ICourseTableDAOService">
+		<property name="dao" ref="ICourseTableDAOImpl" />
+	</bean>
+	
+	<!-- PositionTableDAO 相关 -->
+	<bean id="IPositionTableDAOImpl" class="org.yhb.dao.impl.IPositionTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IPositionTableDAOService" class="org.yhb.dao.service.IPositionTableDAOService">
+		<property name="dao" ref="IPositionTableDAOImpl" />
+	</bean>
+	
+	<!-- TimeTableDAO 相关 -->
+	<bean id="ITimeTableDAOImpl" class="org.yhb.dao.impl.ITimeTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="ITimeTableDAOService" class="org.yhb.dao.service.ITimeTableDAOService">
+		<property name="dao" ref="ITimeTableDAOImpl" />
+	</bean>
+	
+	<!-- IFileTableDAO 相关 -->
+	<bean id="IFileTableDAOImpl" class="org.yhb.dao.impl.IFileTableDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="IFileTableDAOService" class="org.yhb.dao.service.IFileTableDAOService">
+		<property name="dao" ref="IFileTableDAOImpl" />
+	</bean>
+	
+	
+	<!-- CourseSource -->
+	<bean id="ICourseSourceDAOImpl" class="org.yhb.dao.impl.ICourseSourceDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="ICourseSourceDAOService" class="org.yhb.dao.service.ICourseSourceDAOService">
+		<property name="dao" ref="ICourseSourceDAOImpl" />
+	</bean>
+	
+	<!-- CourseType -->
+	<bean id="ICourseTypeDAOImpl" class="org.yhb.dao.impl.ICourseTypeDAOImpl">
+		<property name="session" ref="sqlSession" />
+	</bean>
+
+	<bean id="ICourseTypeDAOService" class="org.yhb.dao.service.ICourseTypeDAOService">
+		<property name="dao" ref="ICourseTypeDAOImpl" />
+	</bean>
+</beans>
