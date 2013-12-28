@@ -19,8 +19,10 @@ import jxl.write.WritableWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.yhb.dao.mapper.UserMapper;
 import org.yhb.dao.service.IClassTableDAOService;
 import org.yhb.dao.service.ICourseSourceDAOService;
 import org.yhb.dao.service.ICourseTableDAOService;
@@ -42,6 +44,7 @@ import org.yhb.vo.MajorTable;
 import org.yhb.vo.PositionTable;
 import org.yhb.vo.StudentDetail;
 import org.yhb.vo.TeacherPosition;
+import org.yhb.vo.UserCriteria;
 import org.yhb.vo.UserTable;
 
 @Controller
@@ -164,6 +167,33 @@ public class UserController {
 				FinalDatas.xmlFileBasicLocation, "user");
 		map.put("leftBar", leftBar);
 		return "panel/panel";
+	}
+	
+	@RequestMapping(params = "c=deleteTeachers")
+	public String deleteTeachers(
+			@RequestParam("teacherIdList") List<Integer> teacherIdList,
+			HttpServletRequest request, ModelMap modelMap) {
+		UserTable user = (UserTable) request.getSession().getAttribute("user");
+		modelMap.put("url", "user.do?c=listTeachers");
+		modelMap.put("time", "1");
+		if (user.getRole() == 1) {// 是管理员
+			if(teacherIdList != null && teacherIdList.size() >0){
+				UserMapper userMapper = (UserMapper) BeanFactory
+						.getBean(UserMapper.class);
+				try {
+					UserCriteria params = new UserCriteria();
+					params.createCriteria().andUseridIn(teacherIdList);
+					userMapper.deleteByExample(params);
+					modelMap.put("message", "批量删除成功");
+				} catch (Exception e) {
+					modelMap.put("message", "对不起，批量删除失败");
+				}
+			}
+		} else {
+			modelMap.put("message", "对不起，你没有权限，删除失败");
+			modelMap.put("url", "news.do?c=newslist");
+		}
+		return "global/notify";
 	}
 	
 	/**

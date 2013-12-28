@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.yhb.dao.mapper.UserMapper;
 import org.yhb.dao.service.IAnnouncementDAOService;
 import org.yhb.dao.service.ICourseTableDAOService;
 import org.yhb.dao.service.ITimeTableDAOService;
@@ -21,6 +22,7 @@ import org.yhb.util.FinalDatas;
 import org.yhb.vo.CourseTable;
 import org.yhb.vo.StudentDetail;
 import org.yhb.vo.TimeTable;
+import org.yhb.vo.UserCriteria;
 import org.yhb.vo.UserTable;
 
 @Controller
@@ -111,8 +113,16 @@ public class SystemController {
 					courseDao.initialSystem();
 				}
 				if(teachers!=null && "1".equals(teachers)){
-					//删除课题
-					userDao.initialSystemDeleteTeachers();
+					//删除教师信息
+					UserMapper userMapper = (UserMapper) BeanFactory
+							.getBean(UserMapper.class);
+					try {
+						UserCriteria params = new UserCriteria();
+						params.createCriteria().andUseridGreaterThan(0).andRoleEqualTo((byte)2);
+						userMapper.deleteByExample(params);
+					} catch (Exception e) {
+						throw e;
+					}
 				}
 				if(eraseSelected!=null && "1".equals(eraseSelected)){
 					userDao.eraseStudentsSelections();

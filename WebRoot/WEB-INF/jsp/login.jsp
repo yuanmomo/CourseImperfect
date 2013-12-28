@@ -47,6 +47,7 @@
             	<span style="color: red; float:left; margin-left: 80px">1.老师请直接用姓名和初始密码登录，</span>
             	<span style="color: red; float:left; margin-left: 92px">登录后请尽快修改密码并更新个人信息。</span><br/>
             	<span style="color: red; float: left; margin-left: 80px">2.学生请先注册，注册后用学号和密码登录。</span><br/>
+            	<span style="color: red; float: left; margin-left: 80px">3.推荐使用chrome或者firefox浏览器。</span><br/>
             </div>
             <div id="innerregister">
                 <form id="registerform" action="login.do?submit&filter=false" method="post" onsubmit="return checkLogin();">

@@ -27,7 +27,9 @@ public class BeanFactory{
 	public static Object getBean(String name){
 		return context.getBean(name);
 	}
-	
+	public static <T> T getBean(Class<T> clazz){
+		return context.getBean(clazz);
+	}
 	public static BeanFactory getInstance(){
 		return Inner.getInstance();
 	}

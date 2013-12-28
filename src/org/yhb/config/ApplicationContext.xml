@@ -62,4 +62,8 @@
 
 	<import resource="MyBatisDAOBeans.xml" />
 	<import resource="ServiceBean.xml" />
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.yhb.dao.mapper" />
+	</bean>
 </beans>

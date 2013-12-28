@@ -352,7 +352,26 @@ function buildCourseSourceAndTypeData(){
 	});
 }
 
+// 批量选择
+function selectAllTeacher(obj,cName){
+	var checkboxs = document.getElementsByName(cName);
+	if(checkboxs !=null && checkboxs.length >0){
+		for(var i=0;i<checkboxs.length;i++){ 
+	        checkboxs[i].checked = obj.checked; 
+	    } 
+	}
+}
 
+// 提交批量删除老师信息
+function deleteAllteachers(){
+	var deleteItems=$("input[name='teacherIdList']:checked"); 
+    if(deleteItems!=null && deleteItems.length>0){ 
+    	document.form.action="user.do?c=deleteTeachers";
+    	document.form.submit();
+    }else{ 
+    	error("请选择要删除的老师",3000); 
+    } 
+}
 
 
 ///**正则匹配是否满足

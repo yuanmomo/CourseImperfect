@@ -32,10 +32,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		TEAMAXSTU=#{teaMaxStu},TEACURRENTSTU = #{teaCurrentStu},
 		STUCLASSID =#{stuClassId},STUCOURSEID =  #{stuCourseId},
 		STUTEACHERID = #{stuTeacherId} 
-		WHERE USERID =#{userId} AND ISDELETED='0'
+		WHERE USERID =#{userId} AND ISDELETED=0
 	</update>
 	<select id="isStuNumberExist" resultType="int" parameterType="String">
-		SELECT COUNT(*) FROM USERTABLE WHERE ISDELETED='0' AND STUNUMBER=#{stuNumber}
+		SELECT COUNT(*) FROM USERTABLE WHERE ISDELETED=0 AND STUNUMBER=#{stuNumber}
 	</select>
 	<select id="getTeachersCount" resultType="int">
 		SELECT COUNT(*) FROM USERTABLE WHERE ISDELETED=0 AND ROLE=2
@@ -141,7 +141,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<delete id="initialSystemDeleteStudents">
 		delete from usertable where userid>0 and role=3;	
 	</delete>
-	<delete id="initialSystemDeleteTeachers">
-		delete from usertable where userid>0 and role=2;	
-	</delete>
+	<update id="eraseTeacherCurrentStudents">
+		UPDATE USERTABLE SET 
+		TEACURRENTSTU =0 
+		WHERE role=2 AND ISDELETED=0
+	</update>
+	<update id="eraseStudentsSelections">
+		UPDATE USERTABLE SET STUCOURSEID = 0,
+		STUTEACHERID =0 
+		WHERE role=3 AND ISDELETED=0
+	</update>
 </mapper>

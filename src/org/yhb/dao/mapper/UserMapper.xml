@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yhb.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="org.yhb.vo.User" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="TINYINT" />
+    <result column="regTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="regIp" property="regip" jdbcType="VARCHAR" />
+    <result column="lastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="lastLoginIp" property="lastloginip" jdbcType="VARCHAR" />
+    <result column="teaPosition" property="teaposition" jdbcType="TINYINT" />
+    <result column="teaCurrentStu" property="teacurrentstu" jdbcType="TINYINT" />
+    <result column="teaMaxStu" property="teamaxstu" jdbcType="TINYINT" />
+    <result column="stuNumber" property="stunumber" jdbcType="CHAR" />
+    <result column="stuClassId" property="stuclassid" jdbcType="TINYINT" />
+    <result column="stuCourseId" property="stucourseid" jdbcType="INTEGER" />
+    <result column="stuTeacherId" property="stuteacherid" jdbcType="INTEGER" />
+    <result column="isDeleted" property="isdeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.yhb.vo.User" extends="BaseResultMap" >
+    <result column="teaDescription" property="teadescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    userId, userName, password, phone, email, role, regTime, regIp, lastLoginTime, lastLoginIp, 
+    teaPosition, teaCurrentStu, teaMaxStu, stuNumber, stuClassId, stuCourseId, stuTeacherId, 
+    isDeleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    teaDescription
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.yhb.vo.UserCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from usertable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.yhb.vo.UserCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from usertable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start &gt;= 0 " >
+      limit ${start}
+    </if>
+    <if test="end &gt;= 0 " >
+      ,${end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from usertable
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from usertable
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.yhb.vo.UserCriteria" >
+    delete from usertable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.yhb.vo.User" >
+    insert into usertable (userId, userName, password, 
+      phone, email, role, 
+      regTime, regIp, lastLoginTime, 
+      lastLoginIp, teaPosition, teaCurrentStu, 
+      teaMaxStu, stuNumber, stuClassId, 
+      stuCourseId, stuTeacherId, isDeleted, 
+      teaDescription)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{role,jdbcType=TINYINT}, 
+      #{regtime,jdbcType=TIMESTAMP}, #{regip,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{lastloginip,jdbcType=VARCHAR}, #{teaposition,jdbcType=TINYINT}, #{teacurrentstu,jdbcType=TINYINT}, 
+      #{teamaxstu,jdbcType=TINYINT}, #{stunumber,jdbcType=CHAR}, #{stuclassid,jdbcType=TINYINT}, 
+      #{stucourseid,jdbcType=INTEGER}, #{stuteacherid,jdbcType=INTEGER}, #{isdeleted,jdbcType=TINYINT}, 
+      #{teadescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.yhb.vo.User" >
+    insert into usertable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="regtime != null" >
+        regTime,
+      </if>
+      <if test="regip != null" >
+        regIp,
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime,
+      </if>
+      <if test="lastloginip != null" >
+        lastLoginIp,
+      </if>
+      <if test="teaposition != null" >
+        teaPosition,
+      </if>
+      <if test="teacurrentstu != null" >
+        teaCurrentStu,
+      </if>
+      <if test="teamaxstu != null" >
+        teaMaxStu,
+      </if>
+      <if test="stunumber != null" >
+        stuNumber,
+      </if>
+      <if test="stuclassid != null" >
+        stuClassId,
+      </if>
+      <if test="stucourseid != null" >
+        stuCourseId,
+      </if>
+      <if test="stuteacherid != null" >
+        stuTeacherId,
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted,
+      </if>
+      <if test="teadescription != null" >
+        teaDescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=TINYINT},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginip != null" >
+        #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="teaposition != null" >
+        #{teaposition,jdbcType=TINYINT},
+      </if>
+      <if test="teacurrentstu != null" >
+        #{teacurrentstu,jdbcType=TINYINT},
+      </if>
+      <if test="teamaxstu != null" >
+        #{teamaxstu,jdbcType=TINYINT},
+      </if>
+      <if test="stunumber != null" >
+        #{stunumber,jdbcType=CHAR},
+      </if>
+      <if test="stuclassid != null" >
+        #{stuclassid,jdbcType=TINYINT},
+      </if>
+      <if test="stucourseid != null" >
+        #{stucourseid,jdbcType=INTEGER},
+      </if>
+      <if test="stuteacherid != null" >
+        #{stuteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="teadescription != null" >
+        #{teadescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.yhb.vo.UserCriteria" resultType="java.lang.Integer" >
+    select count(*) from usertable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update usertable
+    <set >
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=TINYINT},
+      </if>
+      <if test="record.regtime != null" >
+        regTime = #{record.regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regip != null" >
+        regIp = #{record.regip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null" >
+        lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastloginip != null" >
+        lastLoginIp = #{record.lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaposition != null" >
+        teaPosition = #{record.teaposition,jdbcType=TINYINT},
+      </if>
+      <if test="record.teacurrentstu != null" >
+        teaCurrentStu = #{record.teacurrentstu,jdbcType=TINYINT},
+      </if>
+      <if test="record.teamaxstu != null" >
+        teaMaxStu = #{record.teamaxstu,jdbcType=TINYINT},
+      </if>
+      <if test="record.stunumber != null" >
+        stuNumber = #{record.stunumber,jdbcType=CHAR},
+      </if>
+      <if test="record.stuclassid != null" >
+        stuClassId = #{record.stuclassid,jdbcType=TINYINT},
+      </if>
+      <if test="record.stucourseid != null" >
+        stuCourseId = #{record.stucourseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuteacherid != null" >
+        stuTeacherId = #{record.stuteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdeleted != null" >
+        isDeleted = #{record.isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.teadescription != null" >
+        teaDescription = #{record.teadescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update usertable
+    set userId = #{record.userid,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=TINYINT},
+      regTime = #{record.regtime,jdbcType=TIMESTAMP},
+      regIp = #{record.regip,jdbcType=VARCHAR},
+      lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      lastLoginIp = #{record.lastloginip,jdbcType=VARCHAR},
+      teaPosition = #{record.teaposition,jdbcType=TINYINT},
+      teaCurrentStu = #{record.teacurrentstu,jdbcType=TINYINT},
+      teaMaxStu = #{record.teamaxstu,jdbcType=TINYINT},
+      stuNumber = #{record.stunumber,jdbcType=CHAR},
+      stuClassId = #{record.stuclassid,jdbcType=TINYINT},
+      stuCourseId = #{record.stucourseid,jdbcType=INTEGER},
+      stuTeacherId = #{record.stuteacherid,jdbcType=INTEGER},
+      isDeleted = #{record.isdeleted,jdbcType=TINYINT},
+      teaDescription = #{record.teadescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update usertable
+    set userId = #{record.userid,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=TINYINT},
+      regTime = #{record.regtime,jdbcType=TIMESTAMP},
+      regIp = #{record.regip,jdbcType=VARCHAR},
+      lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      lastLoginIp = #{record.lastloginip,jdbcType=VARCHAR},
+      teaPosition = #{record.teaposition,jdbcType=TINYINT},
+      teaCurrentStu = #{record.teacurrentstu,jdbcType=TINYINT},
+      teaMaxStu = #{record.teamaxstu,jdbcType=TINYINT},
+      stuNumber = #{record.stunumber,jdbcType=CHAR},
+      stuClassId = #{record.stuclassid,jdbcType=TINYINT},
+      stuCourseId = #{record.stucourseid,jdbcType=INTEGER},
+      stuTeacherId = #{record.stuteacherid,jdbcType=INTEGER},
+      isDeleted = #{record.isdeleted,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.yhb.vo.User" >
+    update usertable
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=TINYINT},
+      </if>
+      <if test="regtime != null" >
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regip != null" >
+        regIp = #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginip != null" >
+        lastLoginIp = #{lastloginip,jdbcType=VARCHAR},
+      </if>
+      <if test="teaposition != null" >
+        teaPosition = #{teaposition,jdbcType=TINYINT},
+      </if>
+      <if test="teacurrentstu != null" >
+        teaCurrentStu = #{teacurrentstu,jdbcType=TINYINT},
+      </if>
+      <if test="teamaxstu != null" >
+        teaMaxStu = #{teamaxstu,jdbcType=TINYINT},
+      </if>
+      <if test="stunumber != null" >
+        stuNumber = #{stunumber,jdbcType=CHAR},
+      </if>
+      <if test="stuclassid != null" >
+        stuClassId = #{stuclassid,jdbcType=TINYINT},
+      </if>
+      <if test="stucourseid != null" >
+        stuCourseId = #{stucourseid,jdbcType=INTEGER},
+      </if>
+      <if test="stuteacherid != null" >
+        stuTeacherId = #{stuteacherid,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted = #{isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="teadescription != null" >
+        teaDescription = #{teadescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.yhb.vo.User" >
+    update usertable
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      role = #{role,jdbcType=TINYINT},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      regIp = #{regip,jdbcType=VARCHAR},
+      lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      lastLoginIp = #{lastloginip,jdbcType=VARCHAR},
+      teaPosition = #{teaposition,jdbcType=TINYINT},
+      teaCurrentStu = #{teacurrentstu,jdbcType=TINYINT},
+      teaMaxStu = #{teamaxstu,jdbcType=TINYINT},
+      stuNumber = #{stunumber,jdbcType=CHAR},
+      stuClassId = #{stuclassid,jdbcType=TINYINT},
+      stuCourseId = #{stucourseid,jdbcType=INTEGER},
+      stuTeacherId = #{stuteacherid,jdbcType=INTEGER},
+      isDeleted = #{isdeleted,jdbcType=TINYINT},
+      teaDescription = #{teadescription,jdbcType=LONGVARCHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.yhb.vo.User" >
+    update usertable
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      role = #{role,jdbcType=TINYINT},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      regIp = #{regip,jdbcType=VARCHAR},
+      lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      lastLoginIp = #{lastloginip,jdbcType=VARCHAR},
+      teaPosition = #{teaposition,jdbcType=TINYINT},
+      teaCurrentStu = #{teacurrentstu,jdbcType=TINYINT},
+      teaMaxStu = #{teamaxstu,jdbcType=TINYINT},
+      stuNumber = #{stunumber,jdbcType=CHAR},
+      stuClassId = #{stuclassid,jdbcType=TINYINT},
+      stuCourseId = #{stucourseid,jdbcType=INTEGER},
+      stuTeacherId = #{stuteacherid,jdbcType=INTEGER},
+      isDeleted = #{isdeleted,jdbcType=TINYINT}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="AliasResultMap" type="org.yhb.vo.User" >
+    <id column="USERTABLE_USERID" property="userid" jdbcType="INTEGER" />
+    <result column="USERTABLE_USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="USERTABLE_PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="USERTABLE_PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="USERTABLE_EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="USERTABLE_ROLE" property="role" jdbcType="TINYINT" />
+    <result column="USERTABLE_REGTIME" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="USERTABLE_REGIP" property="regip" jdbcType="VARCHAR" />
+    <result column="USERTABLE_LASTLOGINTIME" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="USERTABLE_LASTLOGINIP" property="lastloginip" jdbcType="VARCHAR" />
+    <result column="USERTABLE_TEAPOSITION" property="teaposition" jdbcType="TINYINT" />
+    <result column="USERTABLE_TEACURRENTSTU" property="teacurrentstu" jdbcType="TINYINT" />
+    <result column="USERTABLE_TEAMAXSTU" property="teamaxstu" jdbcType="TINYINT" />
+    <result column="USERTABLE_STUNUMBER" property="stunumber" jdbcType="CHAR" />
+    <result column="USERTABLE_STUCLASSID" property="stuclassid" jdbcType="TINYINT" />
+    <result column="USERTABLE_STUCOURSEID" property="stucourseid" jdbcType="INTEGER" />
+    <result column="USERTABLE_STUTEACHERID" property="stuteacherid" jdbcType="INTEGER" />
+    <result column="USERTABLE_ISDELETED" property="isdeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Alias_Column_List" >
+    USERTABLE.USERID			AS		USERTABLE_USERID, USERTABLE.USERNAME			AS		USERTABLE_USERNAME, 
+    USERTABLE.PASSWORD			AS		USERTABLE_PASSWORD, USERTABLE.PHONE			AS		USERTABLE_PHONE, 
+    USERTABLE.EMAIL			AS		USERTABLE_EMAIL, USERTABLE.ROLE			AS		USERTABLE_ROLE, USERTABLE.REGTIME			AS		USERTABLE_REGTIME, 
+    USERTABLE.REGIP			AS		USERTABLE_REGIP, USERTABLE.LASTLOGINTIME			AS		USERTABLE_LASTLOGINTIME, 
+    USERTABLE.LASTLOGINIP			AS		USERTABLE_LASTLOGINIP, USERTABLE.TEAPOSITION			AS		USERTABLE_TEAPOSITION, 
+    USERTABLE.TEACURRENTSTU			AS		USERTABLE_TEACURRENTSTU, USERTABLE.TEAMAXSTU			AS		USERTABLE_TEAMAXSTU, 
+    USERTABLE.STUNUMBER			AS		USERTABLE_STUNUMBER, USERTABLE.STUCLASSID			AS		USERTABLE_STUCLASSID, 
+    USERTABLE.STUCOURSEID			AS		USERTABLE_STUCOURSEID, USERTABLE.STUTEACHERID			AS		USERTABLE_STUTEACHERID, 
+    USERTABLE.ISDELETED			AS		USERTABLE_ISDELETED
+  </sql>
+</mapper>

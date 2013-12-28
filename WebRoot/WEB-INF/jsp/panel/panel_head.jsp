@@ -12,7 +12,6 @@
 <script language="javascript" src="scripts/jquery.js"></script>
 <!-- xscript type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>-->
 <script type="text/javascript" src="facebox/facebox.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui-timepicker-addon.js"></script>
 <script language="javascript" src="js/common.js"></script>
 <script language="javascript" src="js/check.js"></script>
 <script language="javascript" src="js/data.js"></script>

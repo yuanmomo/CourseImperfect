@@ -1,6 +1,5 @@
 package org.yhb.dao.service;
 
-import org.yhb.dao.IMajorTableDAO;
 import org.yhb.util.BeanFactory;
 import org.yhb.vo.UserTable;
 

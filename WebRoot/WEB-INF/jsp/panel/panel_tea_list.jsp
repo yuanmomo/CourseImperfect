@@ -6,11 +6,11 @@
                 <h2>用户管理</h2>
             </div>
             <div class="contentbox">
-                <form name="form" action="" onsubmit=""  method="post">
+                <form name="form" method="post">
             	<table width="100%">
                 	<thead>
                     	<tr>
-                    		<td width="5%">序号</td>
+                    		<td width="5%">序号<input type="checkbox" id="checkboxall" onchange="selectAllTeacher(this,'teacherIdList')"></td>
                             <td width="20%">教师姓名</td>
                             <td width="10%">职称</td>
                              <td width="10%">电话</td>
@@ -18,13 +18,12 @@
                             <td width="10%">带生情况</td>
                             <td width="10%">出题情况</td>
                             <td width="10%">操作</td>
-                            <%-- <td width="10%"><input type="checkbox" id="checkboxall" value="" name=""></td> --%>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="vo" items="${teachers}" varStatus="voStatu">
                     	<tr class="alt">
-                    		<td width="5%"><c:out value="${voStatu.count}"></c:out></td>
+                    		<td width="5%"> <input type="checkbox" name="teacherIdList" value="<c:out value="${vo.userId}"/>"><c:out value="${voStatu.count}"></c:out></td>
                             <td><a onclick="viewTea(<c:out value="${vo.userId}"/>)" href="javascript:void(0);">
                             <c:out value="${vo.userName}"/></a></td>
                             <td><c:out escapeXml="false" value="${vo.position_Name}"/></td>
@@ -38,22 +37,17 @@
                                    <a onclick="if(confirm('确定删除?')){window.location.href='user.do?c=delete&id=<c:out value="${vo.userId}"/>'}" href="javascript:void(null);">
                                    <img alt="Unapprove" src="img/icons/icon_unapprove.png"></a>
                            </td>
-                            <%-- <td><input type="checkbox" name="checkall[]" value="<c:out value="${vo.course_Id}"/>"></td> --%>
                         </tr>
                         <input type="hidden" name="id[]" value="<c:out value="${vo.userId}"/>" />
                         </c:forEach>
                     </tbody>
                 </table>
                 <div class="extrabottom">
+               		<ul>
+                            <li><a href="#" onclick="deleteAllteachers('teacherIdList');return false;"><img border="0" alt="Add" src="img/icons/icon_delete.png">批量删除</a></li>
+                    </ul>
                     <div class="bulkactions">
                     	${pageSplit}
-                    	 <%-- 
-                    	<select id="bulkaction">
-                        	<option value="0">批量操作</option>
-                        	<option value="1">删除</option>
-                        </select>
-                        <input type="submit" class="btn" value="确认">
-                          --%>
                     </div>
                 </div>
                 </form>

@@ -25,14 +25,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		PUBLISHDATE=#{publishDate},TAG=#{tag},
 		COURSESOURCE=#{courseSource},COURSETYPE=#{courseType},
 		ISSELECTED=#{isSelected} 
-		WHERE COURSE_ID=#{course_Id} AND ISDELETED='0'
+		WHERE COURSE_ID=#{course_Id} AND ISDELETED=0
 	</update>
 	<update id="doUpdateACourseTea" parameterType="CourseTea">
 		UPDATE COURSETABLE SET COURSE_NAME=#{course_Name},
 		COURSE_DESCRIPTION=#{course_Description},
 		TEACHER=#{userId},STUDENT=#{student},
 		PUBLISHDATE=#{publishDate},TAG=#{tag},ISSELECTED=#{isSelected} 
-		WHERE COURSE_ID=#{course_Id} AND ISDELETED='0'
+		WHERE COURSE_ID=#{course_Id} AND ISDELETED=0
 	</update>
 	<select id="doQuery" resultType="Course">
 		SELECT A1.COURSE_ID,A1.COURSE_NAME,A1.COURSE_DESCRIPTION, 
@@ -109,19 +109,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<delete id="initialSystem">
 		delete from coursetable where course_id>0;	
 	</delete>
-	
-	<!-- 
-	<select id="getCourseDetailByTeaId" resultType="CourseDetail">
-	
-	</select>
-	<select id="getCourseDetail" resultType="CourseDetail" parameterType="">
-	SELECT COURSE_NAME AS 'COURSENAME',COURSE_DESCRIPTION AS 'COURSEDESCRIPTION',
-	TEA.USERNAME AS 'TEANAME', TEA.PHONE AS 'TEAPHONE', TEA.EMAIL AS 'TEAEMAIL',
-	STU.USERNAME AS 'STUNAME',STU.STUNUMBER AS 'STUNUMBER',STU.PHONE AS 'STUPHONE',
-	STU.EMAIL AS 'STUEMAIL',CLASS.CLASSNAMECHI AS 'STUCLASSNAME',MAJOR.MAJORNAME AS 'STUMAJORNAME'
-	FROM COURSETABLE COUR,USERTABLE TEA,USERTABLE STU,CLASSTABLE CLASS,MAJORTABLE MAJOR WHERE 
-	COUR.TEACHER=TEA.USERID AND COUR.STUDENT=STU.USERID AND COUR.ISDELETED=0 
-	AND STU.STUCLASSID=CLASS.CLASSID AND CLASS.INMAJOR=MAJOR.MAJORID
-	</select>
-	 -->
+	<update id="eraseCousrseSelected">
+		UPDATE COURSETABLE SET STUDENT=0,ISSELECTED=0
+		WHERE  ISDELETED=0
+	</update>
 </mapper>
