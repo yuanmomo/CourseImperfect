@@ -16,6 +16,7 @@ local.properties
 #.settings/
 .loadpath
 target/classes
+WebRoo/WEB-INF/classes
 
 # External tool builders
 #.externalToolBuilders/
