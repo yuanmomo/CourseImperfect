@@ -360,8 +360,7 @@ public class SystemController {
 						UserTable u=ite.next();
 						//判断该老师是否被选满
 						//没有出够题目的老师不参与分配
-						int cs=(int)(u.getTeaMaxStu()*1.5);
-						if(u.getTeaMaxStu()<=u.getTeaCurrentStu() || courseDao.getCountOneTeacher(u.getUserId())<cs){
+						if(u.getTeaMaxStu()<=u.getTeaCurrentStu()){
 							ite.remove();
 						}else{
 							needStudentsCount+=(u.getTeaMaxStu()-u.getTeaCurrentStu());
@@ -374,7 +373,7 @@ public class SystemController {
 				System.out.println("当前还有"+needStudentsCount+"个学生可以选课题");	
 				//遍历学生和老师，一个学生的向老师中加入，如果老师被填满，则选下一个老师
 				//剩余的可选学生总人数大于当前未选课题的学生人数
-				if(leftStudents.size()<needStudentsCount){
+				if(leftStudents.size()<=needStudentsCount){
 					//查出所有未被选课题
 					List<CourseTable> leftCoursese=courseDao.doQuery();
 					if(leftCoursese!=null && leftCoursese.size()>0){
