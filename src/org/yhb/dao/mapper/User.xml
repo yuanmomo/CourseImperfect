@@ -31,7 +31,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		TEAPOSITION=#{teaPosition},TEADESCRIPTION =#{teaDescription},
 		TEAMAXSTU=#{teaMaxStu},TEACURRENTSTU = #{teaCurrentStu},
 		STUCLASSID =#{stuClassId},STUCOURSEID =  #{stuCourseId},
-		STUTEACHERID = #{stuTeacherId} 
+		STUTEACHERID = #{stuTeacherId}, stuNumber = #{stuNumber}
 		WHERE USERID =#{userId} AND ISDELETED=0
 	</update>
 	<select id="isStuNumberExist" resultType="int" parameterType="String">
